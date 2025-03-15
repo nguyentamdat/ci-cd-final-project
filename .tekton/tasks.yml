@@ -1,11 +1,13 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
-name: cleanup
+metadata:
+  name: cleanup
 spec:
   workspaces:
     - name: source
   steps:
     - name: remove
+      image: alpine:3
       env:
         - name: WORKSPACE_SOURCE_PATH
           value: $(workspaces.source.path)
@@ -32,7 +34,8 @@ spec:
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
-name: nose
+metadata:
+  name: nose
 spec:
   workspaces:
     - name: source
